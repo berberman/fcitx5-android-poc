@@ -11,6 +11,13 @@ enum class SetupPage {
 
     fun getHintText(context: Context) = context.getString(
         when (this) {
+            Enable -> R.string.enable_ime_hint
+            Select -> R.string.select_ime_hint
+        }
+    )
+
+    fun getButtonText(context: Context) = context.getString(
+        when (this) {
             Enable -> R.string.enable_ime
             Select -> R.string.select_ime
         }
@@ -18,6 +25,7 @@ enum class SetupPage {
 
     fun getButtonAction(context: Context) = when (this) {
         Enable -> context.startActivity(Intent(ACTION_INPUT_METHOD_SETTINGS))
-        Select -> context.getSystemService(InputMethodManager::class.java).showInputMethodPicker()
+        Select -> context.getSystemService(InputMethodManager::class.java)
+            .showInputMethodPicker()
     }
 }
