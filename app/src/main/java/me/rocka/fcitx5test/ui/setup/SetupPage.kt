@@ -1,10 +1,8 @@
 package me.rocka.fcitx5test.ui.setup
 
 import android.content.Context
-import android.content.Intent
-import android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS
-import android.view.inputmethod.InputMethodManager
 import me.rocka.fcitx5test.R
+import me.rocka.fcitx5test.utils.InputMethodUtil
 
 enum class SetupPage {
     Enable, Select;
@@ -24,8 +22,12 @@ enum class SetupPage {
     )
 
     fun getButtonAction(context: Context) = when (this) {
-        Enable -> context.startActivity(Intent(ACTION_INPUT_METHOD_SETTINGS))
-        Select -> context.getSystemService(InputMethodManager::class.java)
-            .showInputMethodPicker()
+        Enable -> InputMethodUtil.startSettingsActivity(context)
+        Select -> InputMethodUtil.showSelector(context)
+    }
+
+    fun isDone() = when (this) {
+        Enable -> InputMethodUtil.isEnabled()
+        Select -> InputMethodUtil.isSelected()
     }
 }

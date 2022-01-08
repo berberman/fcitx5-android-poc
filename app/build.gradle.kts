@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         applicationId = "me.rocka.fcitx5test"
-        minSdk = 23
+        minSdk = 21
         targetSdk = 31
         versionCode = 1
         versionName = "0.0.1"
