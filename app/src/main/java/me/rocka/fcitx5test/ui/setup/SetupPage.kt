@@ -30,4 +30,11 @@ enum class SetupPage {
         Enable -> InputMethodUtil.isEnabled()
         Select -> InputMethodUtil.isSelected()
     }
+
+    companion object {
+        fun SetupPage.isLastPage() = this == values().last()
+        fun Int.isLastPage() = this == values().size - 1
+        fun hasUndonePage() = values().any { !it.isDone() }
+        fun firstUndonePage() = values().firstOrNull { !it.isDone() }
+    }
 }

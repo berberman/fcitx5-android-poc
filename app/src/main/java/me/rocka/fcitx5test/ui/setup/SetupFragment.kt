@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import me.rocka.fcitx5test.databinding.FragmentSetupBinding
+import me.rocka.fcitx5test.ui.setup.SetupPage.Companion.isLastPage
 import kotlin.properties.Delegates
 
 class SetupFragment(private val page: SetupPage) : Fragment() {
@@ -16,7 +17,7 @@ class SetupFragment(private val page: SetupPage) : Fragment() {
     private lateinit var binding: FragmentSetupBinding
 
     private var isDone: Boolean by Delegates.observable(page.isDone()) { _, _, new ->
-        if (page == SetupPage.values().last())
+        if (new && page.isLastPage())
             viewModel.isAllDone.value = true
         with(binding) {
             hintText.text = page.getHintText(requireContext())
@@ -37,6 +38,7 @@ class SetupFragment(private val page: SetupPage) : Fragment() {
         return binding.root
     }
 
+    // called on window focus changed
     fun sync() {
         isDone = page.isDone()
     }
