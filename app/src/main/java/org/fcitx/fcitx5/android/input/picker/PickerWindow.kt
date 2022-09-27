@@ -81,12 +81,17 @@ class PickerWindow(val data: List<Pair<String, Array<String>>>) :
 
     override fun onCreateBarExtension() = pickerLayout.tabsUi.root
 
+    override fun beforeAttached() {
+        pickerPagesAdapter.updateRecent()
+    }
+
     override fun onAttached() {
         pickerLayout.embeddedKeyboard.keyActionListener = keyActionListener
     }
 
     override fun onDetached() {
         pickerLayout.embeddedKeyboard.keyActionListener = null
+        pickerPagesAdapter.saveRecent()
     }
 
     override val showTitle = false
