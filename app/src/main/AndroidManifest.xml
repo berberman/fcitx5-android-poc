@@ -122,6 +122,7 @@
         <service
             android:name=".FcitxRemoteService"
             android:exported="true"
+            android:process=":remote"
             android:permission="org.fcitx.fcitx5.android.permission.IPC" />
 
         <provider

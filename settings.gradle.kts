@@ -24,3 +24,4 @@ include(":lib:plugin-base")
 include(":plugin:anthy")
 rootProject.name = "fcitx5-android"
 include(":lib:common")
+include(":plugin:clipboard")
