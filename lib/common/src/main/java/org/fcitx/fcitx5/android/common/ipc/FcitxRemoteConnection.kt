@@ -5,22 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.util.Log
 
 fun Context.bindFcitxRemoteService(
     debugBuild: Boolean,
-    onDisconnected: () -> Unit = {},
+    onDisconnect: () -> Unit = {},
     onConnected: (IFcitxRemoteService) -> Unit
 ): FcitxRemoteConnection {
-    val connection = FcitxRemoteConnection(onDisconnected, onConnected)
+    val connection = FcitxRemoteConnection(onConnected, onDisconnect)
     bindService(
-        Intent().apply {
+        Intent("org.fcitx.fcitx5.android.IPC").apply {
             val pkgName = "org.fcitx.fcitx5.android" + if (debugBuild) ".debug" else ""
-            Log.e("Bind", pkgName)
-            setClassName(
-                pkgName,
-                "${pkgName}.FcitxRemoteService"
-            )
+            setPackage(pkgName)
         },
         connection,
         Context.BIND_AUTO_CREATE
@@ -29,12 +24,17 @@ fun Context.bindFcitxRemoteService(
 }
 
 open class FcitxRemoteConnection(
-    private val onDisconnected: () -> Unit = {},
-    private val onConnected: (IFcitxRemoteService) -> Unit
+    private val onConnected: (IFcitxRemoteService) -> Unit,
+    private val onDisconnected: () -> Unit
 ) : ServiceConnection {
+    var remoteService: IFcitxRemoteService? = null
+        private set
 
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
-        onConnected(IFcitxRemoteService.Stub.asInterface(service))
+        IFcitxRemoteService.Stub.asInterface(service).let {
+            remoteService = it
+            onConnected(it)
+        }
     }
 
     override fun onServiceDisconnected(name: ComponentName) {

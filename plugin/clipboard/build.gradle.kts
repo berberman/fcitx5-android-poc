@@ -5,6 +5,7 @@ plugins {
     id("android-plugin-app-convention")
     id("build-metadata")
     id("data-descriptor")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -24,6 +25,11 @@ android {
     }
 }
 
+configure<DataDescriptorPluginExtension> {
+    excludes.set(listOf("data.minify.json"))
+}
+
 dependencies {
     implementation(project(":lib:plugin-base"))
+    implementation(libs.kotlinx.serialization.json)
 }
