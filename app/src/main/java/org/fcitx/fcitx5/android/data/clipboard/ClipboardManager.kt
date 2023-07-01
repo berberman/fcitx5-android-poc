@@ -42,7 +42,7 @@ object ClipboardManager : ClipboardManager.OnPrimaryClipChangedListener,
 
     private val onUpdateListeners = WeakHashSet<OnClipboardUpdateListener>()
 
-    var transformer : ((String) -> String)? = null
+    var transformer: ((String) -> String)? = null
 
     fun addOnUpdateListener(listener: OnClipboardUpdateListener) {
         onUpdateListeners.add(listener)
