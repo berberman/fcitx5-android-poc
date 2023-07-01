@@ -9,10 +9,10 @@ plugins {
 }
 
 android {
-    namespace = "org.fcitx.fcitx5.android.plugin.clipboard"
+    namespace = "org.fcitx.fcitx5.android.plugin.clipboard_filter"
 
     defaultConfig {
-        applicationId = "org.fcitx.fcitx5.android.plugin.clipboard"
+        applicationId = "org.fcitx.fcitx5.android.plugin.clipboard_filter"
     }
 
     buildTypes {

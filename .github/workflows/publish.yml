@@ -3,6 +3,9 @@ name: Publish
 on:
   push:
     branches: [master]
+    paths:
+      - 'build-logic/**'
+      - 'lib/**'
 
 jobs:
   publish:

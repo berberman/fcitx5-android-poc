@@ -1,4 +1,4 @@
-package org.fcitx.fcitx5.android.plugin.clipboard
+package org.fcitx.fcitx5.android.plugin.clipboard_filter
 
 import android.app.job.JobParameters
 import android.app.job.JobService

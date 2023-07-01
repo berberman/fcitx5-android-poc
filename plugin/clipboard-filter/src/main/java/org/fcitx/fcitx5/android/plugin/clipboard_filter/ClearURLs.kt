@@ -1,4 +1,4 @@
-package org.fcitx.fcitx5.android.plugin.clipboard
+package org.fcitx.fcitx5.android.plugin.clipboard_filter
 
 import android.content.res.AssetManager
 import android.util.Log

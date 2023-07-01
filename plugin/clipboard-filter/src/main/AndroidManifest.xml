@@ -9,7 +9,7 @@
             android:name=".ClearURLsService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <receiver
-            android:name=".MyBroadcastReceiver"
+            android:name=".FcitxAppCreatedBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="org.fcitx.fcitx5.android.APP_CREATED" />

@@ -21,9 +21,9 @@
 # Generated asset descriptor
 /plugin/anthy/src/main/assets/descriptor.json
 
-# Module :plugin:clipboard
+# Module :plugin:clipboard-filter
 # Generated asset descriptor
-/plugin/clipboard/src/main/assets/descriptor.json
+/plugin/clipboard-filter/src/main/assets/descriptor.json
 
 
 # Intellij

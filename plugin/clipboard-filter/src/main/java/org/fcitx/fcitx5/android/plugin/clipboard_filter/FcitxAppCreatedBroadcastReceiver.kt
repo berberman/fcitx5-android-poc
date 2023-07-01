@@ -1,4 +1,4 @@
-package org.fcitx.fcitx5.android.plugin.clipboard
+package org.fcitx.fcitx5.android.plugin.clipboard_filter
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-class MyBroadcastReceiver : BroadcastReceiver() {
+class FcitxAppCreatedBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Log.d("MyBroadcastReceiver", "Received fcitx application created")
         context
