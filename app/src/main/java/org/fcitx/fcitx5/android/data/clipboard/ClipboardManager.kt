@@ -145,11 +145,18 @@ object ClipboardManager : ClipboardManager.OnPrimaryClipChangedListener,
     }
 
     override fun onPrimaryClipChanged() {
-        clipboardManager.primaryClip
-            ?.let { ClipboardEntry.fromClipData(it, transformer) }
-            ?.takeIf { it.text.isNotBlank() }
-            ?.let { e ->
-                launch {
+        launch {
+            clipboardManager.primaryClip
+                ?.let {
+                    withContext(Dispatchers.IO) {
+                        ClipboardEntry.fromClipData(
+                            it,
+                            transformer
+                        )
+                    }
+                }
+                ?.takeIf { it.text.isNotBlank() }
+                ?.let { e ->
                     mutex.withLock {
                         clbDao.find(e.text, e.sensitive)?.let {
                             updateLastEntry(it.copy(timestamp = e.timestamp))
@@ -163,7 +170,7 @@ object ClipboardManager : ClipboardManager.OnPrimaryClipChangedListener,
                         updateLastEntry(clbDao.get(rowId) ?: e)
                     }
                 }
-            }
+        }
     }
 
     private suspend fun removeOutdated() {
